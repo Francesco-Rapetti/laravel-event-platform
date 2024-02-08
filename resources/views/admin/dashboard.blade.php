@@ -27,16 +27,16 @@
                 <div class="card-img-top-container dash d-flex align-items-center justify-content-center">
                 </div>
                 <div class="card-body">
-                    <h1 class="card-title text-center">Projects
+                    <h1 class="card-title text-center">Events
                     </h1>
-                    <p class="card-text text-center">There are {{ count($projects) }} projects</p>
+                    <p class="card-text text-center">There are {{ count($events) }} events</p>
                 </div>
                 <div class="d-flex align-items-center mb-3 ps-3 justify-self-end justify-content-center">
                     <a class="btn btn-primary me-3 add-cart-btn w-100 d-flex justify-content-center align-items-center"
-                        href="{{ route('admin.projects.index') }}"><i class="fa-solid fa-list-ul fs-2"></i>
+                        href="{{ route('admin.events.index') }}"><i class="fa-solid fa-list-ul fs-2"></i>
                     </a>
                     <a class="btn btn-primary me-3 add-cart-btn w-100 d-flex justify-content-center align-items-center"
-                        href="{{ route('admin.projects.create') }}"><i class="fa-solid fa-plus fs-2"></i>
+                        href="{{ route('admin.events.create') }}"><i class="fa-solid fa-plus fs-2"></i>
                     </a>
                 </div>
             </div>
@@ -45,16 +45,16 @@
                 <div class="card-img-top-container dash d-flex align-items-center justify-content-center">
                 </div>
                 <div class="card-body">
-                    <h1 class="card-title text-center">Types
+                    <h1 class="card-title text-center">Tags
                     </h1>
-                    <p class="card-text text-center">There are {{ count($types) }} project types</p>
+                    <p class="card-text text-center">There are {{ count($tags) }} tags</p>
                 </div>
                 <div class="d-flex align-items-center mb-3 ps-3 justify-self-end justify-content-center">
                     <a class="btn btn-primary me-3 add-cart-btn w-100 d-flex justify-content-center align-items-center"
-                        href="{{ route('admin.types.index') }}"><i class="fa-solid fa-list-ul fs-2"></i>
+                        href="{{ route('admin.tags.index') }}"><i class="fa-solid fa-list-ul fs-2"></i>
                     </a>
                     <a class="btn btn-primary me-3 add-cart-btn w-100 d-flex justify-content-center align-items-center"
-                        href="{{ route('admin.types.create') }}"><i class="fa-solid fa-plus fs-2"></i>
+                        href="{{ route('admin.tags.create') }}"><i class="fa-solid fa-plus fs-2"></i>
                     </a>
                 </div>
             </div>
