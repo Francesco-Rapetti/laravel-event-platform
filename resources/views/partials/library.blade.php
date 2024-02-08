@@ -1,54 +1,47 @@
 <div class="container">
     <div class="row justify-content-center gap-3">
         <div class="d-flex justify-content-center flex-wrap">
-            @foreach ($projects as $project)
+            @foreach ($events as $event)
                 <div class="card w-100 m-2 glass" style="width: 18rem;">
-                    <div class="card-img-top-container d-flex align-items-center justify-content-center">
-                        <img src="{{ $project->image }}" class="card-img-top" alt="...">
-                    </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{ $project->name }}
-                            @if ($project->type_id)
-                                <span class="badge bg-secondary"><i
-                                        class="{{ App\Models\Type::find($project->type_id)->icon }} me-2"></i>{{ App\Models\Type::find($project->type_id)->name }}</span>
-                            @endif
-                        </h5>
-                        @if ($project->technologies)
-                            @foreach ($project->technologies as $technology)
-                                <span class="badge rounded-pill {{ $technology->color }}">{{ $technology->name }}</span>
+                        <h5 class="card-title">{{ $event->name }}</h5>
+                        @if ($event->tags)
+                            @foreach ($event->tags as $tag)
+                                <span class="badge rounded-pill bg-light text-dark">{{ $tag->name }}</span>
                             @endforeach
                         @endif
-                        <p class="card-text">{{ $project->description }}</p>
+                        <p class="card-text">{{ $event->description }}</p>
                     </div>
                     <div class="d-flex align-items-center mb-3 ps-3 justify-self-end justify-content-center">
                         <a class="btn btn-primary me-3 add-cart-btn w-100 d-flex justify-content-center align-items-center"
-                            href="{{ $project->url }}" target="_blank"><i class="fa-brands fa-github fs-2"></i>
+                            href="{{ route('admin.events.show', $event->id) }}" target="_blank"><i
+                                class="fa-solid fa-circle-info fs-2 me-2"></i> More info
                         </a>
 
 
 
-                        @if (Route::currentRouteName() == 'admin.projects.index')
-                            <a href="{{ route('admin.projects.edit', $project->id) }}"
+                        @if (Route::currentRouteName() == 'admin.events.index')
+                            <a href="{{ route('admin.events.edit', $event->id) }}"
                                 class="btn btn-warning me-3 w-25 d-flex justify-content-center align-items-center"><i
                                     class="fa-solid fa-pen fs-5"></i></a>
 
                             <!-- Button trigger modal -->
                             <button type="button"
                                 class="btn btn-danger me-3 w-25 d-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#{{ $project->id }}">
+                                data-bs-toggle="modal" data-bs-target="#{{ $event->id }}">
                                 <i class="fa-solid fa-trash-can fs-5"></i>
                             </button>
                         @endif
                     </div>
 
                 </div>
-                <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
+                <form action="{{ route('admin.events.destroy', $event) }}" method="POST">
                     @csrf
                     @method('DELETE')
 
 
                     <!-- Modal -->
-                    <div class="modal fade" id="{{ $project->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    <div class="modal fade" id="{{ $event->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content text-dark rounded-0">
@@ -58,7 +51,7 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Are you sure you want to delete {{ $project->name }}?</p>
+                                    <p>Are you sure you want to delete {{ $event->name }}?</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary rounded-0 fw-bold"
