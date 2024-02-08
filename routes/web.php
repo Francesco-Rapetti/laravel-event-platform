@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\ProjectsController;
-use App\Models\Project;
-use App\Models\Type;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\TagController;
+use App\Models\Event;
+use App\Models\Tag;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +19,9 @@ use App\Models\Type;
 */
 
 Route::get('/', function () {
-    $types = Type::all();
-    $projects = Project::all();
-    return view('welcome', compact('projects', 'types'));
+    $events = Event::all();
+    $tags = Tag::all();
+    return view('welcome', compact('events', 'tags'));
 });
 
 Route::middleware(['auth'])
@@ -34,9 +34,9 @@ Route::middleware(['auth'])
         // - il nome della rotta ->name("dashboard") diventa ->name("admin.dashboard")
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-        Route::resource('projects', ProjectsController::class);
+        Route::resource('events', EventController::class);
 
-        Route::resource('types', TypeController::class);
+        Route::resource('tags', TagController::class);
     });
 
 require __DIR__ . '/auth.php';
