@@ -4,17 +4,19 @@
             @foreach ($events as $event)
                 <div class="card w-100 m-2 glass" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $event->name }}</h5>
+                        <h3 class="card-title">{{ $event->name }}</h3>
                         @if ($event->tags)
                             @foreach ($event->tags as $tag)
-                                <span class="badge rounded-pill bg-light text-dark">{{ $tag->name }}</span>
+                                <span class="badge rounded-pill {{ $tag->color }}">{{ $tag->name }}</span>
                             @endforeach
                         @endif
-                        <p class="card-text">{{ $event->description }}</p>
+                        <p class="card-text my-3">{{ $event->description }}</p>
+                        <div><i class="fa-solid fa-calendar-days me-2"></i>{{ $event->date }}</div>
+                        <div><i class="fa-solid fa-ticket me-2"></i>{{ $event->available_tickets }}</div>
                     </div>
                     <div class="d-flex align-items-center mb-3 ps-3 justify-self-end justify-content-center">
                         <a class="btn btn-primary me-3 add-cart-btn w-100 d-flex justify-content-center align-items-center"
-                            href="{{ route('admin.events.show', $event->id) }}" target="_blank"><i
+                            href="{{ route('admin.events.show', $event->id) }}"><i
                                 class="fa-solid fa-circle-info fs-2 me-2"></i> More info
                         </a>
 
@@ -44,7 +46,7 @@
                     <div class="modal fade" id="{{ $event->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
-                            <div class="modal-content text-dark rounded-0">
+                            <div class="modal-content text-dark">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="warningTitle">WARNING</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -54,10 +56,9 @@
                                     <p>Are you sure you want to delete {{ $event->name }}?</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary rounded-0 fw-bold"
+                                    <button type="button" class="btn btn-secondary fw-bold"
                                         data-bs-dismiss="modal">DISCARD</button>
-                                    <input id="deleteBtn" class="btn btn-danger rounded-0 fw-bold" type="submit"
-                                        value="DELETE">
+                                    <input id="deleteBtn" class="btn btn-danger fw-bold" type="submit" value="DELETE">
                                 </div>
                             </div>
                         </div>
