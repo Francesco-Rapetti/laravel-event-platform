@@ -12,6 +12,11 @@ class Event extends Model
         'name',
         'description',
         'date',
-        'avaliable_tickets',
+        'available_tickets',
     ];
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

@@ -22,9 +22,9 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            ProjectTechnologySeeder::class,
             TagSeeder::class,
             EventSeeder::class,
+            EventTagSeeder::class,
         ]);
     }
 }
