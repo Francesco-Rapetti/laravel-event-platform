@@ -7,12 +7,21 @@ use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
+    public function validation(Request $request)
+    {
+        $request->validate([
+            "name" => "required",
+            "color" => "required",
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $tags = Tag::all();
+        return view("admin.tags.index", compact("tags"));
     }
 
     /**
@@ -20,7 +29,8 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        $colors = Tag::all()->pluck("color")->toArray();
+        return view("admin.tags.create", compact("colors"));
     }
 
     /**
@@ -28,7 +38,11 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validation($request);
+        $tag = new Tag();
+        $tag->fill($request->all());
+        $tag->save();
+        return redirect()->route("admin.tags.index");
     }
 
     /**
@@ -36,7 +50,7 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        //
+        return view("admin.tags.show", compact("tag"));
     }
 
     /**
@@ -44,7 +58,8 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        $colors = Tag::all()->pluck("color")->toArray();
+        return view("admin.tags.edit", compact("tag", "colors"));
     }
 
     /**
@@ -52,7 +67,10 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $this->validation($request);
+        $tag->fill($request->all());
+        $tag->save();
+        return redirect()->route("admin.tags.index");
     }
 
     /**
@@ -60,6 +78,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+        return redirect()->route("admin.tags.index");
     }
 }
