@@ -4,9 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
+use App\Models\Tag;
 
 class EventController extends Controller
 {
+    public function validation(Request $request)
+    {
+        $request->validate([
+            "name" => "required",
+            // "description" => "required",
+            "date" => "required|date",
+            // "tags" => "required",
+            "available_tickets" => "required|integer",
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -21,7 +33,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        $tags = Tag::all();
+        return view("admin.events.create", compact("tags"));
     }
 
     /**
@@ -29,7 +42,12 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validation($request);
+        $event = new Event();
+        $event->fill($request->all());
+        $event->save();
+        $event->tags()->attach($request->tags);
+        return redirect()->route("admin.events.index");
     }
 
     /**
@@ -37,7 +55,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        return view("admin.events.show", compact("event"));
     }
 
     /**
@@ -45,7 +63,8 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        $tags = Tag::all();
+        return view("admin.events.edit", compact("tags", "event"));
     }
 
     /**
@@ -53,7 +72,11 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //
+        $this->validation($request);
+        $event->fill($request->all());
+        $event->save();
+        $event->tags()->sync($request->tags);
+        return redirect()->route("admin.events.index");
     }
 
     /**
@@ -61,6 +84,7 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        $event->delete();
+        return redirect()->route("admin.events.index");
     }
 }
