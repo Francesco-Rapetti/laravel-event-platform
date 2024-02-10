@@ -13,6 +13,11 @@
                         <p class="card-text my-3">{{ $event->description }}</p>
                         <div><i class="fa-solid fa-calendar-days me-2"></i>{{ $event->date }}</div>
                         <div><i class="fa-solid fa-ticket me-2"></i>{{ $event->available_tickets }}</div>
+                        @if ($event->user_id)
+                            <div><i
+                                    class="fa-solid fa-user-large me-2"></i>{{ App\Models\User::find($event->user_id)->name }}
+                            </div>
+                        @endif
                     </div>
                     <div class="d-flex align-items-center mb-3 ps-3 justify-self-end justify-content-center">
                         <a class="btn btn-primary me-3 add-cart-btn w-100 d-flex justify-content-center align-items-center"

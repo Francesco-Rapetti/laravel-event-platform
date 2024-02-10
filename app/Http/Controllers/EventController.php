@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -44,6 +45,7 @@ class EventController extends Controller
     {
         $this->validation($request);
         $event = new Event();
+        $event->user_id = Auth::id();
         $event->fill($request->all());
         $event->save();
         $event->tags()->attach($request->tags);
