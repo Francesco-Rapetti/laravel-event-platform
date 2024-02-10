@@ -17,3 +17,18 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/users', function () {
+    $utenti = \App\Models\User::all();
+    return response()->json($utenti);
+});
+
+Route::get('/events', function () {
+    $eventi = \App\Models\Event::all();
+    return response()->json($eventi);
+});
+
+Route::get('/tags', function () {
+    $tags = \App\Models\Tag::all();
+    return response()->json($tags);
+});
