@@ -38,7 +38,7 @@
 
                 <div class="mb-3">
                     <label for="color" class="form-label">Seleziona il colore</label>
-                    <select name="color" id="color" class="form-select" multiple>
+                    <select name="color" id="color" class="form-select">
                         @foreach ($colors as $color)
                             <option value="{{ $color }}">{{ $color }}</option>
                         @endforeach
