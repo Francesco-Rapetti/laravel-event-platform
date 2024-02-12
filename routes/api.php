@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +28,4 @@ Route::get('/users', function () {
 Route::get('/events', [EventController::class, 'index']);
 Route::get('/events/{id}', [EventController::class, 'show']);
 
-Route::get('/tags', function () {
-    $tags = \App\Models\Tag::all();
-    return response()->json($tags);
-});
+Route::resource('tags', TagController::class);
